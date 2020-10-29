@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     backgroundColor: "#3366FF",
+    marginBottom: "1rem"
   },
 }))
 
