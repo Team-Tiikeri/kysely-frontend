@@ -1,0 +1,64 @@
+{
+  "questionnaires": [
+    {
+      "id": 1,
+      "title": "Questionnaire 1",
+      "questions": [
+        {
+          "id": 1,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 2,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 3,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 4,
+          "type": "text",
+          "isRequired": false,
+          "content": "Example question"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Questionnaire 2",
+      "questions": [
+        {
+          "id": 1,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 2,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 3,
+          "type": "text",
+          "isRequired": true,
+          "content": "Example question"
+        },
+        {
+          "id": 4,
+          "type": "text",
+          "isRequired": false,
+          "content": "Example question"
+        }
+      ]
+    }
+  ]
+}
