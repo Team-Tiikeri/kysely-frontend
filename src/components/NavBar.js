@@ -26,7 +26,7 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Link to="/">
+          <Link style={{ textDecoration: "none", color: "#fff" }} to="/">
             <Typography variant="h5">KyselyApp</Typography>
           </Link>
         </Toolbar>

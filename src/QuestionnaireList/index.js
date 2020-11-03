@@ -9,7 +9,10 @@ const QuestionnaireList = ({ data }) => {
       <h2>Questionnaires</h2>
       {data.questionnaires.map((questionnaire) => (
         <Card styles={{ margin: 20 }} key={questionnaire.id}>
-          <Link to={`/${questionnaire.id}`}>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to={`/${questionnaire.id}`}
+          >
             <h3>{`${questionnaire.title}`}</h3>
           </Link>
         </Card>
