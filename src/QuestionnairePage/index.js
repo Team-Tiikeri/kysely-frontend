@@ -1,16 +1,21 @@
 import React from "react"
-import Container from "../components/Container"
+import { useParams } from "react-router-dom"
 import Card from "../components/Card"
-import data from "../mockData.json"
+import Container from "../components/Container"
 
-const QuestionnairePage = () => {
+const QuestionnairePage = ({ data }) => {
+  const { id } = useParams()
+  const questionnaire = data.questionnaires.filter((q) => q.id !== id)[0]
+  console.log(questionnaire)
   return (
     <Container>
-      <Card>
-        {data.questionnaires.map((questionnaire) => (
-          <div
-            key={questionnaire.id}
-          >{`ID: ${questionnaire.id} - ${questionnaire.title} - Questions: ${questionnaire.questions.length}`}</div>
+      <Card styles={{ width: "80%" }}>
+        {questionnaire.title}
+        {questionnaire.questions.map((question) => (
+          <p key={question.id}>
+            {question.content} - Is required:{" "}
+            {question.isRequired ? "true" : "false"}
+          </p>
         ))}
       </Card>
     </Container>

@@ -2,6 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import AppBar from "@material-ui/core/AppBar"
 import { Toolbar, Typography } from "@material-ui/core"
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     backgroundColor: "#3366FF",
-    marginBottom: "1rem"
+    marginBottom: "1rem",
   },
 }))
 
@@ -25,7 +26,9 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Typography variant="h5">KyselyApp</Typography>
+          <Link to="/">
+            <Typography variant="h5">KyselyApp</Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

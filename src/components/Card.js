@@ -9,7 +9,7 @@ const Card = ({ children, styles }) => {
   }
 
   return (
-    <MaterialUICard className={customStyle} variant="outlined">
+    <MaterialUICard style={customStyle} variant="outlined">
       <CardContent>{children}</CardContent>
     </MaterialUICard>
   )
