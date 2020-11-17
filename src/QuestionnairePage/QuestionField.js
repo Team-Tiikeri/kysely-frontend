@@ -8,11 +8,18 @@ const QuestionField = ({
   handleContentChange,
   questionValues,
 }) => {
+  const [disabled, setDisabled] = React.useState(false)
+
   return (
     <div>
       {question.content} - Is required: {question.isRequired ? "true" : "false"}
       <br />
-      <form onSubmit={(event) => handleSubmit(event, question.questionId)}>
+      <form
+        onSubmit={(event) => {
+          handleSubmit(event, question.questionId)
+          setDisabled(true)
+        }}
+      >
         <TextField
           id="outlined-basic"
           label={question.title}
@@ -21,8 +28,9 @@ const QuestionField = ({
           name={questionValues[question.id]}
           value={question.id}
           onChange={handleContentChange}
+          disabled={disabled}
         />
-        <Button type="submit">Submit answer</Button>
+        <Button disabled={disabled} type="submit">Submit answer</Button>
       </form>
     </div>
   )
