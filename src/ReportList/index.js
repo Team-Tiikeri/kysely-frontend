@@ -17,8 +17,8 @@ const ReportList = ({ data }) => {
       <h2>Reports</h2>
       <Card>
         <ul>
-          {data.map((questionnaire) => (
-            <Questionnaire questionnaire={questionnaire} />
+          {data.map((questionnaire, index) => (
+            <Questionnaire key={index} questionnaire={questionnaire} />
           ))}
         </ul>
       </Card>
