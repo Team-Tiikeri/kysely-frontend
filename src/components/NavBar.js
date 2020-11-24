@@ -18,20 +18,29 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3366FF",
     marginBottom: "1rem",
   },
+  link: {
+    textDecoration: "none",
+    color: "#fff",
+    marginRight: 12
+  }
 }))
 
 const NavBar = () => {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Link style={{ textDecoration: "none", color: "#fff" }} to="/">
+          <Link className={classes.link} to="/">
             <Typography variant="h5">KyselyApp</Typography>
+          </Link>
+          <Link className={classes.link} to="/">
+            <Typography variant="h6">Home</Typography>
+          </Link>
+          <Link className={classes.link} to="/reports">
+            <Typography variant="h6">Reports</Typography>
           </Link>
         </Toolbar>
       </AppBar>
-    </div>
   )
 }
 
