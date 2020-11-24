@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar"
 import QuestionnaireList from "./QuestionnaireList"
 import QuestionnairePage from "./QuestionnairePage"
 import ReportList from "./ReportList"
+import ReportPage from "./ReportPage"
 //import data from "./mockData.json"
 
 const App = () => {
@@ -27,6 +28,9 @@ const App = () => {
       <div>
         <NavBar />
         <Switch>
+          <Route path="/reports/:id">
+            <ReportPage />
+          </Route>
           <Route path="/reports">
             <ReportList data={questionnaires} />
           </Route>
