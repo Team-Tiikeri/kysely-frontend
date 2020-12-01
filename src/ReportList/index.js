@@ -1,29 +1,29 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Card from "../components/Card"
-import Container from "../components/Container"
+import React from "react";
+import { Link } from "react-router-dom";
+import Card from "../components/Card";
+import Container from "../components/Container";
 
 const Questionnaire = ({ questionnaire }) => (
-  <li key={questionnaire.questionnaireId}>
-    <Link to={`/reports/${questionnaire.questionnaireId}`}>
+  <Link
+    style={{ textDecoration: "none", color: "black" }}
+    to={`/reports/${questionnaire.questionnaireId}`}
+  >
+    <Card styles={{ margin: 10 }} key={questionnaire.questionnaireId}>
       {questionnaire.title}
-    </Link>
-  </li>
-)
+    </Card>
+  </Link>
+);
 
 const ReportList = ({ data }) => {
   return (
     <Container>
       <h2>Reports</h2>
-      <Card>
-        <ul>
-          {data.map((questionnaire, index) => (
-            <Questionnaire key={index} questionnaire={questionnaire} />
-          ))}
-        </ul>
-      </Card>
-    </Container>
-  )
-}
 
-export default ReportList
+      {data.map((questionnaire, index) => (
+        <Questionnaire key={index} questionnaire={questionnaire} />
+      ))}
+    </Container>
+  );
+};
+
+export default ReportList;

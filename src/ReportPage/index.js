@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../components/Card";
@@ -20,20 +21,21 @@ const ReportPage = () => {
 
   return (
     <Container>
-      <Card>
-        {questionnaire.title}
-
-        {Object.values(questionnaire.questions).map((question, index) => (
-          <div key={index}>
-            <h3> {question.content}</h3>
+      <Typography variant="h3">{questionnaire.title} Report</Typography>
+      {Object.values(questionnaire.questions).map((question, index) => (
+        <Card key={index} styles={{ margin: 10 }}>
+          <Typography variant="h6"> {question.content}</Typography>
+          {question.answers.length === 0 ? (
+            <span style={{margin: 5}}>No answers</span>
+          ) : (
             <ul>
               {question.answers.map((answer, index) => (
                 <li key={index}>{answer.content}</li>
               ))}
             </ul>
-          </div>
-        ))}
-      </Card>
+          )}
+        </Card>
+      ))}
     </Container>
   );
 };

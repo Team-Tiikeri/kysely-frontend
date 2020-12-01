@@ -6,6 +6,7 @@ import QuestionnaireList from "./QuestionnaireList"
 import QuestionnairePage from "./QuestionnairePage"
 import ReportList from "./ReportList"
 import ReportPage from "./ReportPage"
+import "typeface-roboto"
 //import data from "./mockData.json"
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
   }, [])
 
   if (!questionnaires) {
-    return <div>moi</div>
+    return <div>Loading</div>
   }
 
   return (
