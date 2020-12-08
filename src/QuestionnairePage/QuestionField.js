@@ -17,7 +17,6 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
   useEffect(() => {
     let state = {}
     question.options.map(option => state = { ...state, [option.optionId]: false })
-    console.log('state', state)
     setChecked(state)
   }, [])
   
@@ -35,7 +34,7 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
       return (
         <FormControl component="fieldset">
           <FormLabel component="legend">{question.content}</FormLabel>
-          <RadioGroup name={question.title} value={question.title} onChange={handleContentChange}>
+          <RadioGroup name={String(question.questionId)} value={questionValues[question.questionId]} onChange={handleContentChange}>
             {question.options.map(option => (
                 <FormControlLabel value={option.content} control={<Radio />} label={option.content} />
             ))}

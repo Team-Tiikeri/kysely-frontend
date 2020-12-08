@@ -24,13 +24,12 @@ const QuestionnairePage = () => {
           let questionsState = {}
 
           // Creates dynamic state for QuestionFields
-          response.questions.map(
-            (question) =>
-              (questionsState = {
-                ...questionsState,
-                [question.questionId]: "",
-              })
-          )
+          response.questions.map((question) => {
+            questionsState = {
+              ...questionsState,
+              [question.questionId]: "",
+            }
+          })
 
           setQuestionValues(questionsState)
           console.log(questionsState)
