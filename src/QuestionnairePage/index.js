@@ -10,7 +10,7 @@ const QuestionnairePage = () => {
 
   const [questions, setQuestions] = useState([])
   const [title, setTitle] = useState("")
-  const [questionValues, setQuestionValues] = useState([])
+  const [questionValues, setQuestionValues] = useState(null)
 
   useEffect(() => {
     const getQuestions = () =>
@@ -25,11 +25,25 @@ const QuestionnairePage = () => {
 
           // Creates dynamic state for QuestionFields
           response.questions.map((question) => {
-            questionsState = {
-              ...questionsState,
-              [question.questionId]: "",
+            if (question.type === "CHECKBOX") {
+              let options = {}
+              question.options.map(
+                (option) => (options = { ...options, [option.optionId]: false })
+              )
+
+              questionsState = {
+                ...questionsState,
+                [question.questionId]: options,
+              }
+            } else {
+              questionsState = {
+                ...questionsState,
+                [question.questionId]: "",
+              }
             }
           })
+
+          console.log(questionsState)
 
           setQuestionValues(questionsState)
           console.log(questionsState)
@@ -65,10 +79,36 @@ const QuestionnairePage = () => {
       .then((response) => console.log(response))
   }
 
-  const handleContentChange = (event) => {
-    const { name, value } = event.target
-    setQuestionValues({ ...questionValues, [name]: value })
+  const handleContentChange = (event, question, isCheckbox) => {
+    const { name, value, checked, type } = event.target
+    /* console.log(question)
+    console.log({ name })
+    console.log(questionValues[question].options) */
+    console.log({ value: value })
+    console.log({ questions: questionValues })
+
+    console.log({
+      ...questionValues,
+      [question]: {
+        ...questionValues[question],
+        [name]: checked ? true : false,
+      },
+    })
+
+    if (isCheckbox) {
+      setQuestionValues({
+        ...questionValues,
+        [question]: {
+          ...questionValues[question],
+          [name]: checked ? true : false,
+        },
+      })
+    } else {
+      setQuestionValues({ ...questionValues, [name]: value })
+    }
   }
+
+  if (!questionValues) return <div>Loading...</div>
 
   return (
     <Container>
