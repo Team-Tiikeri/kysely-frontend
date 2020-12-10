@@ -56,10 +56,13 @@ const QuestionnairePage = () => {
   const generateJson = () => {
     let json = []
     let optionIds = []
+    // [ {...object1}, {...objcet2} ]
     let options = []
+    // { questionId: [ optionId1, optionId2 ] }
     let questionsObject = {}
 
     questions.map((question) => {
+      // If there are options, push them to arrays and object
       if (question.options.length > 0) {
         let optionArray = []
         question.options.map((option) => optionArray.push(option.optionId))
@@ -73,22 +76,26 @@ const QuestionnairePage = () => {
     })
 
     Object.entries(questionValues).map(([key, value]) => {
+      // Check if the answer is type of CHECKBOX
       if (Object.keys(value).length > 0 && value.constructor === Object) {
         Object.entries(value).map(([key, value]) => {
+          // Check if a checkbox field is checked
           if (value === true) {
+            // Find the Option object that matches to the key
             const option = Object.values(options).find(
               (o) => Number(key) === o.optionId
             )
 
             let questionId
 
+            // Find the questionId from questionsObject
             Object.entries(questionsObject).map(([k, val]) => {
               if (val.includes(Number(key))) {
-                console.log(val.includes(Number(key)))
                 questionId = k
               }
             })
 
+            // Push the answer object to json array
             json.push({
               content: option.content,
               question: { questionId: questionId },
@@ -96,6 +103,7 @@ const QuestionnairePage = () => {
           }
         })
       } else {
+        // Push the answer object to json array if the answer is RADIOBUTTON or TEXT
         json.push({ content: value, question: { questionId: key } })
       }
     })
@@ -120,12 +128,7 @@ const QuestionnairePage = () => {
   }
 
   const handleContentChange = (event, question, isCheckbox) => {
-    const { name, value, checked, type } = event.target
-    /* console.log(question)
-    console.log({ name })
-    console.log(questionValues[question].options) */
-    console.log({ value: value })
-    console.log({ questions: questionValues })
+    const { name, value, checked } = event.target
 
     console.log({
       ...questionValues,
