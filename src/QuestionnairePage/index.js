@@ -55,10 +55,50 @@ const QuestionnairePage = () => {
 
   const generateJson = () => {
     let json = []
+    let optionIds = []
+    let options = []
+    let questionsObject = {}
 
-    Object.entries(questionValues).map(([key, value]) =>
-      json.push({ content: value, question: { questionId: key } })
-    )
+    questions.map((question) => {
+      if (question.options.length > 0) {
+        let optionArray = []
+        question.options.map((option) => optionArray.push(option.optionId))
+        questionsObject = {
+          ...questionsObject,
+          [question.questionId]: optionArray,
+        }
+        question.options.map((o) => options.push(o))
+        question.options.map((option) => optionIds.push(option.optionId))
+      }
+    })
+
+    Object.entries(questionValues).map(([key, value]) => {
+      if (Object.keys(value).length > 0 && value.constructor === Object) {
+        Object.entries(value).map(([key, value]) => {
+          if (value === true) {
+            const option = Object.values(options).find(
+              (o) => Number(key) === o.optionId
+            )
+
+            let questionId
+
+            Object.entries(questionsObject).map(([k, val]) => {
+              if (val.includes(Number(key))) {
+                console.log(val.includes(Number(key)))
+                questionId = k
+              }
+            })
+
+            json.push({
+              content: option.content,
+              question: { questionId: questionId },
+            })
+          }
+        })
+      } else {
+        json.push({ content: value, question: { questionId: key } })
+      }
+    })
 
     return JSON.stringify(json)
   }
