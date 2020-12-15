@@ -1,20 +1,10 @@
-import { colors, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Card from "../components/Card"
 import Container from "../components/Container"
 import { PieChart, Pie, Legend, Tooltip, Cell } from "recharts"
 import _ from "lodash"
-
-const getChartData = (data) => {
-  return _(data)
-    .countBy("content")
-    .map((value, key) => ({
-      name: key,
-      value: value,
-    }))
-    .value()
-}
 
 const chartColors = [
   "#7FFFD4",
@@ -29,8 +19,17 @@ const chartColors = [
   "#87CEFA",
 ]
 
+const getChartData = (data) => {
+  return _(data)
+    .countBy("content")
+    .map((value, key) => ({
+      name: key,
+      value: value,
+    }))
+    .value()
+}
+
 const ReportCard = ({ question }) => {
-  console.log(question)
   if (question.type === "TEXT") {
     return (
       <Card styles={{ margin: 10 }}>
@@ -49,8 +48,6 @@ const ReportCard = ({ question }) => {
   }
 
   const data = getChartData(question.answers)
-  console.log({ data })
-  console.log({ colors })
 
   return (
     <Card styles={{ margin: 10 }}>
