@@ -28,7 +28,10 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
   switch (question.type) {
     case "RADIOBUTTON":
       return (
-        <FormControl component="fieldset">
+        <FormControl
+          component="fieldset"
+          style={{ width: "100%", marginBottom: 16 }}
+        >
           <FormLabel component="legend">{question.content}</FormLabel>
           <RadioGroup
             name={String(question.questionId)}
@@ -50,7 +53,10 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
       const isCheckbox = true
       return (
         <div>
-          <FormControl component="fieldset">
+          <FormControl
+            component="fieldset"
+            style={{ width: "100%", marginBottom: 16 }}
+          >
             <FormLabel component="legend">{question.content}</FormLabel>
             <FormHelperText>Valitse 0-2</FormHelperText>
             <FormGroup>
@@ -60,9 +66,7 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
                   control={
                     <Checkbox
                       checked={
-                        questionValues[question.questionId][
-                          option.optionId
-                        ]
+                        questionValues[question.questionId][option.optionId]
                       }
                       onChange={(event) =>
                         handleContentChange(
@@ -84,7 +88,7 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
 
     default:
       return (
-        <div>
+        <div style={{ width: "100%", marginBottom: 16 }}>
           {question.content} - Is required:{" "}
           {question.isRequired ? "true" : "false"}
           <br />

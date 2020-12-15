@@ -24,10 +24,10 @@ const QuestionnairePage = () => {
           let questionsState = {}
 
           // Creates dynamic state for QuestionFields
-          response.questions.map((question) => {
+          response.questions.forEach((question) => {
             if (question.type === "CHECKBOX") {
               let options = {}
-              question.options.map(
+              question.options.forEach(
                 (option) => (options = { ...options, [option.optionId]: false })
               )
 
@@ -58,24 +58,24 @@ const QuestionnairePage = () => {
     // { questionId: [ optionId1, optionId2 ] }
     let questionsObject = {}
 
-    questions.map((question) => {
+    questions.forEach((question) => {
       // If there are options, push them to arrays and object
       if (question.options.length > 0) {
         let optionArray = []
-        question.options.map((option) => optionArray.push(option.optionId))
+        question.options.forEach((option) => optionArray.push(option.optionId))
         questionsObject = {
           ...questionsObject,
           [question.questionId]: optionArray,
         }
-        question.options.map((o) => options.push(o))
-        question.options.map((option) => optionIds.push(option.optionId))
+        question.options.forEach((o) => options.push(o))
+        question.options.forEach((option) => optionIds.push(option.optionId))
       }
     })
 
-    Object.entries(questionValues).map(([key, value]) => {
+    Object.entries(questionValues).forEach(([key, value]) => {
       // Check if the answer is type of CHECKBOX
       if (Object.keys(value).length > 0 && value.constructor === Object) {
-        Object.entries(value).map(([key, value]) => {
+        Object.entries(value).forEach(([key, value]) => {
           // Check if a checkbox field is checked
           if (value === true) {
             // Find the Option object that matches to the key
@@ -86,7 +86,7 @@ const QuestionnairePage = () => {
             let questionId
 
             // Find the questionId from questionsObject
-            Object.entries(questionsObject).map(([k, val]) => {
+            Object.entries(questionsObject).forEach(([k, val]) => {
               if (val.includes(Number(key))) {
                 questionId = k
               }
@@ -144,7 +144,9 @@ const QuestionnairePage = () => {
 
   return (
     <Container>
-      <Card styles={{ width: "80%" }}>
+      <Card
+        styles={{ width: "80%", flexDirection: "column", marginBottom: 16 }}
+      >
         <h2>{title}</h2>
         <form onSubmit={handleSubmit}>
           {questions.map((question) => (
