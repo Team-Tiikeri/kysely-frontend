@@ -11,7 +11,6 @@ const App = () => {
   const [questionnaires, setQuestionnaires] = useState([])
 
   useEffect(() => {
-    console.log("Get questionnaires.")
     fetch("https://ohp20kysely.herokuapp.com/api/questionnaires")
       .then((response) => response.json())
       .then((response) => setQuestionnaires(response))
