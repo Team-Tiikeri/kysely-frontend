@@ -5,7 +5,6 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
-import FormHelperText from "@material-ui/core/FormHelperText"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormGroup from "@material-ui/core/FormGroup"
 
@@ -33,6 +32,7 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
           style={{ width: "100%", marginBottom: 16 }}
         >
           <FormLabel component="legend">{question.content}</FormLabel>
+          {question.isRequired && <span  style={{color:"red" }}> *</span>}
           <RadioGroup
             name={String(question.questionId)}
             value={questionValues[question.questionId]}
@@ -58,7 +58,8 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
             style={{ width: "100%", marginBottom: 16 }}
           >
             <FormLabel component="legend">{question.content}</FormLabel>
-            <FormHelperText>Valitse 0-2</FormHelperText>
+            {question.isRequired && <span  style={{color:"red" }}> *</span>}
+            
             <FormGroup>
               {question.options.map((option) => (
                 <FormControlLabel
@@ -89,8 +90,9 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
     default:
       return (
         <div style={{ width: "100%", marginBottom: 16 }}>
-          {question.content} - Is required:{" "}
-          {question.isRequired ? "true" : "false"}
+          <FormLabel component="legend">{question.content}</FormLabel>
+          
+          {question.isRequired && <span  style={{color:"red" }}> *</span>}
           <br />
           <TextField
             id="outlined-basic"

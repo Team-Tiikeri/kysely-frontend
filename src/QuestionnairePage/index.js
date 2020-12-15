@@ -148,6 +148,7 @@ const QuestionnairePage = () => {
         styles={{ width: "80%", flexDirection: "column", marginBottom: 16 }}
       >
         <h2>{title}</h2>
+        <h5>(Fields marked * are required)</h5>
         <form onSubmit={handleSubmit}>
           {questions.map((question) => (
             <QuestionField
