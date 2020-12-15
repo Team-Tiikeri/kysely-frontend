@@ -1,16 +1,41 @@
-import { Typography } from "@material-ui/core"
+import { colors, Typography } from "@material-ui/core"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Card from "../components/Card"
 import Container from "../components/Container"
-import { PieChart, Pie } from "recharts"
+import { PieChart, Pie, Legend, Tooltip, Cell } from "recharts"
+import _ from "lodash"
 
-const ReportCard = (question) => {
+const getChartData = (data) => {
+  return _(data)
+    .countBy("content")
+    .map((value, key) => ({
+      name: key,
+      value: value,
+    }))
+    .value()
+}
+
+const chartColors = [
+  "#7FFFD4",
+  "#B0E0E6",
+  "#5F9EA0",
+  "#4682B4",
+  "#6495ED",
+  "#00BFFF",
+  "#1E90FF",
+  "#ADD8E6",
+  "#87CEEB",
+  "#87CEFA",
+]
+
+const ReportCard = ({ question }) => {
+  console.log(question)
   if (question.type === "TEXT") {
     return (
       <Card styles={{ margin: 10 }}>
-        <Typography variant="h6"> {question.content}</Typography>
-        {(question.answers.length === 0 || !question.answers) ? (
+        <Typography variant="h6">{question.content}</Typography>
+        {question.answers.length === 0 ? (
           <span style={{ margin: 5 }}>No answers</span>
         ) : (
           <ul>
@@ -22,22 +47,33 @@ const ReportCard = (question) => {
       </Card>
     )
   }
+
+  const data = getChartData(question.answers)
+  console.log({ data })
+  console.log({ colors })
+
   return (
     <Card styles={{ margin: 10 }}>
       <Typography variant="h6">{question.content}</Typography>
-      {(question.answers.length === 0 || !question.answers) ? (
-        <span style={{ margin: 5 }}>No asnwers</span>
+      {question.answers.length === 0 ? (
+        <span style={{ margin: 5 }}>No answers</span>
       ) : (
         <PieChart width={730} height={250}>
           <Pie
-            data={question.answers}
-            dataKey="content"
-            nameKey="content"
+            data={data}
+            dataKey="value"
+            nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={50}
+            outerRadius={80}
             fill="#8884d8"
-          />
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={chartColors[index]} />
+            ))}
+          </Pie>
+          <Legend />
+          <Tooltip />
         </PieChart>
       )}
     </Card>
@@ -51,7 +87,10 @@ const ReportPage = () => {
   useEffect(() => {
     fetch(`https://ohp20kysely.herokuapp.com/api/questionnaires/${id}`)
       .then((response) => response.json())
-      .then((response) => setQuestionnaire(response))
+      .then((response) => {
+        console.log(response)
+        setQuestionnaire(response)
+      })
       .catch((err) => console.log(err))
   }, [id])
 
@@ -63,8 +102,7 @@ const ReportPage = () => {
     <Container>
       <Typography variant="h3">{questionnaire.title} Report</Typography>
       {Object.values(questionnaire.questions).map((question, index) => (
-        <Card key={index} question={question} />
-        
+        <ReportCard key={index} question={question} />
       ))}
     </Container>
   )
