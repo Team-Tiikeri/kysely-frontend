@@ -43,10 +43,7 @@ const QuestionnairePage = () => {
             }
           })
 
-          console.log(questionsState)
-
           setQuestionValues(questionsState)
-          console.log(questionsState)
         })
         .catch((err) => console.log(err))
 
@@ -114,7 +111,6 @@ const QuestionnairePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     const json = generateJson()
-    console.log(json)
 
     const requestOptions = {
       method: "POST",
@@ -125,18 +121,11 @@ const QuestionnairePage = () => {
     fetch("https://ohp20kysely.herokuapp.com/api/answers", requestOptions)
       .then((response) => response.json())
       .then((response) => console.log(response))
+      .catch((error) => console.log(error))
   }
 
   const handleContentChange = (event, question, isCheckbox) => {
     const { name, value, checked } = event.target
-
-    console.log({
-      ...questionValues,
-      [question]: {
-        ...questionValues[question],
-        [name]: checked ? true : false,
-      },
-    })
 
     if (isCheckbox) {
       setQuestionValues({

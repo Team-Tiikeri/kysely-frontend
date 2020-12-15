@@ -14,18 +14,12 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
   const [checked, setChecked] = useState(null)
 
   useEffect(() => {
-    console.log(question)
     let state = {}
     question.options.map(
       (option) => (state = { ...state, [option.optionId]: false })
     )
     setChecked(state)
   }, [])
-
-  const handleChange = (event) => {
-    console.log(checked)
-    setChecked({ ...checked, [event.target.name]: event.target.checked })
-  }
 
   if (!checked) {
     return <div>loading</div>

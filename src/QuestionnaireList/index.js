@@ -4,7 +4,6 @@ import Container from "../components/Container"
 import Card from "../components/Card"
 
 const QuestionnaireList = ({ data }) => {
-  console.log(data);
   return (
     <Container>
       <h2>Questionnaires</h2>
