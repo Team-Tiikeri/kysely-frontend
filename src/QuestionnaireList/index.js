@@ -8,7 +8,7 @@ const QuestionnaireList = ({ data }) => {
     <Container>
       <h2>Questionnaires</h2>
       {data.map((questionnaire) => (
-        <Card styles={{ margin: 20, padding: 0 }} key={questionnaire.questionnaireId}>
+        <Card styles={{ margin: 10 }} key={questionnaire.questionnaireId}>
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={`/${questionnaire.questionnaireId}`}

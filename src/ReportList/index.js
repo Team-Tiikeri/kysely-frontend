@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Card from "../components/Card";
-import Container from "../components/Container";
+import React from "react"
+import { Link } from "react-router-dom"
+import Card from "../components/Card"
+import Container from "../components/Container"
 
 const Questionnaire = ({ questionnaire }) => (
   <Link
@@ -9,10 +9,10 @@ const Questionnaire = ({ questionnaire }) => (
     to={`/reports/${questionnaire.questionnaireId}`}
   >
     <Card styles={{ margin: 10 }} key={questionnaire.questionnaireId}>
-      {questionnaire.title}
+      <h3>{questionnaire.title}</h3>
     </Card>
   </Link>
-);
+)
 
 const ReportList = ({ data }) => {
   return (
@@ -23,7 +23,7 @@ const ReportList = ({ data }) => {
         <Questionnaire key={index} questionnaire={questionnaire} />
       ))}
     </Container>
-  );
-};
+  )
+}
 
-export default ReportList;
+export default ReportList

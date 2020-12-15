@@ -9,7 +9,6 @@ import Checkbox from "@material-ui/core/Checkbox"
 import FormGroup from "@material-ui/core/FormGroup"
 
 const QuestionField = ({ question, handleContentChange, questionValues }) => {
-  const [disabled, setDisabled] = useState(false)
   const [checked, setChecked] = useState(null)
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
       (option) => (state = { ...state, [option.optionId]: false })
     )
     setChecked(state)
-  }, [])
+  }, [question.options])
 
   if (!checked) {
     return <div>loading</div>
@@ -109,7 +108,6 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
             name={String(question.questionId)}
             value={questionValues[question.questionId]}
             onChange={handleContentChange}
-            disabled={disabled}
           />
         </div>
       )
