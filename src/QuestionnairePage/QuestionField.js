@@ -31,8 +31,11 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
           component="fieldset"
           style={{ width: "100%", marginBottom: 16 }}
         >
-          <FormLabel component="legend">{question.content}</FormLabel>
-          {question.isRequired && <span  style={{color:"red" }}> *</span>}
+          <FormLabel component="legend">
+            {question.content}{" "}
+            {question.isRequired && <span style={{ color: "red" }}> *</span>}
+          </FormLabel>
+
           <RadioGroup
             name={String(question.questionId)}
             value={questionValues[question.questionId]}
@@ -57,9 +60,11 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
             component="fieldset"
             style={{ width: "100%", marginBottom: 16 }}
           >
-            <FormLabel component="legend">{question.content}</FormLabel>
-            {question.isRequired && <span  style={{color:"red" }}> *</span>}
-            
+            <FormLabel component="legend">
+              {question.content}{" "}
+              {question.isRequired && <span style={{ color: "red" }}> *</span>}
+            </FormLabel>
+
             <FormGroup>
               {question.options.map((option) => (
                 <FormControlLabel
@@ -90,9 +95,11 @@ const QuestionField = ({ question, handleContentChange, questionValues }) => {
     default:
       return (
         <div style={{ width: "100%", marginBottom: 16 }}>
-          <FormLabel component="legend">{question.content}</FormLabel>
-          
-          {question.isRequired && <span  style={{color:"red" }}> *</span>}
+          <FormLabel component="legend">
+            {question.content}
+            {question.isRequired && <span style={{ color: "red" }}> *</span>}
+          </FormLabel>
+
           <br />
           <TextField
             id="outlined-basic"

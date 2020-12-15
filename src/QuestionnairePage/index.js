@@ -1,16 +1,13 @@
 import { Button } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import Card from "../components/Card"
 import Container from "../components/Container"
 import QuestionField from "./QuestionField"
-import  Snackbar from '@material-ui/core/Snackbar'
 
-const QuestionnairePage = () => {
+const QuestionnairePage = ({ setMsg, setOpen }) => {
   const { id } = useParams()
-
-  const [msg, setMsg] = useState('');
-  const [open, setOpen] = useState(false);
+  const history = useHistory()
 
   const [questions, setQuestions] = useState([])
   const [title, setTitle] = useState("")
@@ -114,8 +111,7 @@ const QuestionnairePage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setMsg("Your answers were saved succesfully!")
-    setOpen(true)
+
     const json = generateJson()
 
     const requestOptions = {
@@ -126,11 +122,20 @@ const QuestionnairePage = () => {
 
     fetch("https://ohp20kysely.herokuapp.com/api/answers", requestOptions)
       .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
-  }
-  const closeSnackbar = () => {
-    setOpen(false);
+      .then((response) => {
+        console.log(response)
+        if (response.error) {
+          setMsg("Submission failed")
+          setOpen(true)
+        } else {
+          setMsg("Your answers were saved succesfully!")
+          history.push("/")
+          setOpen(true)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   const handleContentChange = (event, question, isCheckbox) => {
@@ -177,12 +182,6 @@ const QuestionnairePage = () => {
           </Button>
         </form>
       </Card>
-      <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        onClose={closeSnackbar}
-        message={msg}
-      />
     </Container>
   )
 }
